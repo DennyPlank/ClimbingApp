@@ -5,15 +5,23 @@ class Api::StatesController < ApplicationController
   end
 
   def show
+    render json: @state
+  end
+
+  def create
+    @fact = Fact.create(state_params)
+    if (@fact.save)
+      render json: @fact
+    else
+      # render json: { errors: @fact.errors, x: 1 }, status: :unprocessable_entity
+    end
   end
 
   def update
   end
 
-  def edit
-  end
-
   def destroy
+    render json: @fact.destroy
   end
 
   private
