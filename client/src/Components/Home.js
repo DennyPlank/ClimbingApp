@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import axios from 'axios'
+import axios from 'axios';
 import NewForm from "./NewForm";
-import State from "./State";
 
 const Home = () => {
   const [states, setStates] = useState([]);
