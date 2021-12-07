@@ -3,7 +3,9 @@ import { Route, Routes } from "react-router";
 import About from "./Components/About";
 import Navbar from "./Components/Navbar";
 import Home from "./Components/Home";
+import States from "./Components/States";
 import State from "./Components/State";
+
 
 function App() {
   return (
@@ -15,6 +17,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/home" element={<Home />} />
             <Route path="/states/:id" element={<State />} />
+            <Route path="/states" element={<States />} />
             <Route path="/states/state_id/routes" element={<Routes />} />
             <Route path="/states/state_id/routes/:id" element={<Route />} />
           </Routes>

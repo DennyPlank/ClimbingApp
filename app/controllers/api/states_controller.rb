@@ -9,9 +9,9 @@ class Api::StatesController < ApplicationController
   end
 
   def create
-    @fact = Fact.create(state_params)
-    if (@fact.save)
-      render json: @fact
+    @state = State.create(set_params)
+    if (@state.save)
+      render json: @state
     else
       # render json: { errors: @fact.errors, x: 1 }, status: :unprocessable_entity
     end

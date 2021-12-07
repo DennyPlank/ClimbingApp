@@ -1,40 +1,40 @@
-import axios from 'axios';
-import react from 'react'
+import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router";
 
-const Route = () => {
-  const [routes, setRoute] = useState([]);
+const Routes = (props) => {
   const params = useParams();
-  useEffect(() => {
-    getRoute();
-  }, []); 
+  const [routes, setRoutes] = useState([])
+  useEffect(()=>{
+    getRoutes();
+  },[])
   
-  const getRoute = async () => {
-    console.log(params)
-    let res = await axios.get(`/api/states/${params.id}/routes`);
-    console.log(res.data)
-    setRoute(res.data)
-  };
-    
+  const getRoutes = async () => {
+    console.log('axios hit')
+    let res = await axios.get(`/api/states/${params.id}/routes`)
+    setRoutes(res.data)
+  }
+
   const renderRoutes = () => {
-    return routes.map((route)=>{
-     return (
-       <div>
-         <p> Name: {route.name} </p>
-         <p> Difficulty: {route.grade}</p>
-         <p> Length: {route.length} </p>
-          <Route />
-       </div>
-     ) 
+    return routes.map ((route) => {
+      return (
+        <div>
+          <h3> Routes: </h3>
+          <p> Name: {route.name} </p>
+          <p> Grade: {route.grade} </p>
+          <p> Length: {route.length} </p>
+          <p> View </p>
+          </div>
+      );
     });
   };
-
+  
   return (
-    <div>
-      <h5>{renderRoutes()}</h5>
+    <div> 
+      <h3> Add a route here</h3>
+      <p> {renderRoutes()} </p>
     </div>
-  );
+    )
 };
 
-export default Route;
+export default Routes;

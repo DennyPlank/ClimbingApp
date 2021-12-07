@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from 'axios';
 import NewForm from "./NewForm";
+import States from "./States";
 
 const Home = () => {
   const [states, setStates] = useState([]);
@@ -13,15 +14,12 @@ const Home = () => {
     let res = await axios.get("/api/states");
     setStates(res.data)
   };
-  {/* <State name={state.name} heatIndex={state.heatIndex} /> */}
   
   const renderStates = () => {
     return states.map ((state)=>{
      return (
        <div>
-         <Link to={`/states/${state.id}`}>
-           <button>{state.name}</button>
-         </Link>
+         <States { ...state} />
        </div>
      ) 
     })
@@ -32,7 +30,7 @@ const Home = () => {
       <h1>Welcome to RouteFinder!</h1>
       <h2>Click on a State to begin</h2>
        {renderStates()} 
-       <NewForm />
+       <NewForm { ...states} />
     </div>
   );
 };
