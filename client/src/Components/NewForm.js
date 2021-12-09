@@ -1,36 +1,35 @@
 import axios from 'axios';
 import react, { useState } from 'react'
-import { useNavigate, useParams } from 'react-router';
+import { Navigate, useNavigate, useParams } from 'react-router';
 
 
 const NewForm = (props) => {
-  const params = useParams();
-  const [state, setState] = useState([])
-  const [name, setName] = useState([]);
-  const [heatIndex, setheatIndex] = useState([]);
+  console.log(props)
+  const { addState } = props
+  const [name, setName] = useState(props.name ? props.name : "");
+  const [heatIndex, setheatIndex] = useState(props.heatIndex ? props.heatIndex : "");
   let navigate = useNavigate();
   const [states, setStates] = useState([])
   
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("handleSubmit hit")
-    let newState = {name: name, heatIndex: heatIndex}
-     let res = await axios.post(`/api/states`, newState);
-     setStates([newState, ...states])
+    // if props.id 
+    // return edit function
+    // else 
+    return addState({name: name, heatIndex: heatIndex})
     };
   
     return (
     <div>
       <h4>Toggle / Here</h4>
-      <h3>Add a new State</h3>
+      <h3>{props.id ? "edit" : "add"} State</h3>
       <form>
-      <p>Name:</p>
-        <input required value={name} onChange={(e)=>setName(e.target.value)}/>
-        <p>heatIndex:</p>
-        <input required value={heatIndex} onChange={(e)=>setheatIndex(e.target.value)}/>
-       <button onClick={handleSubmit}>Add</button>
-
-     </form>
+        <p>Name:</p>
+           <input required value={name} onChange={(e)=>setName(e.target.value)}/>
+            <p>heatIndex:</p>
+           <input required value={heatIndex} onChange={(e)=>setheatIndex(e.target.value)}/>
+          <button onClick={handleSubmit}>{props.id ? "edit" : "add"}</button>
+       </form>
 
     </div>
   )

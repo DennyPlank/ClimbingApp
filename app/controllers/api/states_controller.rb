@@ -9,19 +9,23 @@ class Api::StatesController < ApplicationController
   end
 
   def create
-    @state = State.create(set_params)
-    if (@state.save)
-      render json: @state
+    state = State.create(set_params)
+     if (state.save)
+      # render json: state
     else
       # render json: { errors: @fact.errors, x: 1 }, status: :unprocessable_entity
     end
   end
 
   def update
+    # # @state = State.update(set_params)
+    # if (@state.save)
+    #   render json: @state
   end
 
   def destroy
-    render json: @fact.destroy
+    render json: @state.destroy
+    redirect_to states_path
   end
 
   private
